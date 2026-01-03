@@ -1,0 +1,8 @@
+{
+  "user": {
+    "name": "",
+    "age": 0,
+    "preferredGenres": []
+  },
+  "action": "GET_RECOMMENDATIONS"
+}
