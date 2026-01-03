@@ -6,13 +6,18 @@ import java.util.List;
 /**
  * Represents a user in the movie recommendation system.
  * Stores user information and their preferred movie genres.
- **/
-
+ */
 public class User {
     private String name;
     private int age;
-    private List<String> preferredGenres;
+    private List<Genre> preferredGenres;  // Changed to Genre enum!
 
+    /**
+     * Constructor to create a new user.
+     * 
+     * @param name User's name
+     * @param age User's age
+     */
     public User(String name, int age) {
         if (name == null || name.trim().isEmpty()) {
             throw new IllegalArgumentException("Name cannot be null or empty!");
@@ -26,23 +31,32 @@ public class User {
         this.preferredGenres = new ArrayList<>();
     }
 
-    // getters
-    public String getName() { return name; }
-    public int getAge() { return age; }
-    public List<String> getPreferredGenres() { return new ArrayList<>(preferredGenres); }
+    // Getters
+    public String getName() { 
+        return name; 
+    }
+    
+    public int getAge() { 
+        return age; 
+    }
+    
+    public List<Genre> getPreferredGenres() { 
+        return new ArrayList<>(preferredGenres); 
+    }
 
-    // managing genres
-    public void addGenre(String genre) {
-        if (genre == null || genre.trim().isEmpty()) {
-            throw new IllegalArgumentException("Genre cannot be null or empty!");
+    // Managing genres
+    public void addGenre(Genre genre) {  
+        if (genre == null) {
+            throw new IllegalArgumentException("Genre cannot be null!");
         }
         if (!preferredGenres.contains(genre)) {
             preferredGenres.add(genre);
         }
     }
-    public void addPreferredGenres(List<String> genres) {
+    
+    public void addPreferredGenres(List<Genre> genres) {  
         if (genres != null) {
-            for (String genre : genres) {
+            for (Genre genre : genres) {
                 addGenre(genre);
             }
         }

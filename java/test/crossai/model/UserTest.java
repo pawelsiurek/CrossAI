@@ -74,11 +74,11 @@ public class UserTest {
      */
     @Test
     public void testAddSingleGenre() {
-        user.addGenre("Action");
+        user.addGenre(Genre.ACTION);
         
-        List<String> genres = user.getPreferredGenres();
+        List<Genre> genres = user.getPreferredGenres();
         assertEquals(1, genres.size());
-        assertTrue(genres.contains("Action"));
+        assertTrue(genres.contains(Genre.ACTION));
     }
 
     /**
@@ -86,12 +86,12 @@ public class UserTest {
      */
     @Test
     public void testAddDuplicateGenre() {
-        user.addGenre("Action");
-        user.addGenre("Action");
-        user.addGenre("Action");
+        user.addGenre(Genre.ACTION);
+        user.addGenre(Genre.ACTION);
+        user.addGenre(Genre.ACTION);
         
-        List<String> genres = user.getPreferredGenres();
-        assertEquals(1, genres.size()); // Should still be 1
+        List<Genre> genres = user.getPreferredGenres();
+        assertEquals(1, genres.size());
     }
 
     /**
@@ -103,7 +103,7 @@ public class UserTest {
             user.addGenre(null);
         });
         
-        assertEquals("Genre cannot be null or empty!", exception.getMessage());
+        assertEquals("Genre cannot be null!", exception.getMessage());
     }
 
     /**
@@ -111,14 +111,14 @@ public class UserTest {
      */
     @Test
     public void testAddMultipleGenres() {
-        List<String> genres = Arrays.asList("Action", "Comedy", "Sci-Fi");
+        List<Genre> genres = Arrays.asList(Genre.ACTION, Genre.COMEDY, Genre.SCIENCE_FICTION);
         user.addPreferredGenres(genres);
         
-        List<String> userGenres = user.getPreferredGenres();
+        List<Genre> userGenres = user.getPreferredGenres();
         assertEquals(3, userGenres.size());
-        assertTrue(userGenres.contains("Action"));
-        assertTrue(userGenres.contains("Comedy"));
-        assertTrue(userGenres.contains("Sci-Fi"));
+        assertTrue(userGenres.contains(Genre.ACTION));
+        assertTrue(userGenres.contains(Genre.COMEDY));
+        assertTrue(userGenres.contains(Genre.SCIENCE_FICTION));
     }
 
     /**
@@ -126,12 +126,12 @@ public class UserTest {
      */
     @Test
     public void testToString() {
-        user.addGenre("Drama");
+        user.addGenre(Genre.DRAMA);
         String result = user.toString();
         
         assertTrue(result.contains("John Doe"));
         assertTrue(result.contains("25"));
-        assertTrue(result.contains("Drama"));
+        assertTrue(result.contains("DRAMA") || result.contains("Drama"));
     }
 
     /**
@@ -139,14 +139,12 @@ public class UserTest {
      */
     @Test
     public void testGenreListEncapsulation() {
-        user.addGenre("Horror");
-        List<String> genres = user.getPreferredGenres();
+        user.addGenre(Genre.HORROR);
+        List<Genre> genres = user.getPreferredGenres();
         
-        // Try to modify the returned list
-        genres.add("Romance");
+        genres.add(Genre.ROMANCE);
         
-        // Assert - original user's list should NOT be modified
         assertEquals(1, user.getPreferredGenres().size());
-        assertFalse(user.getPreferredGenres().contains("Romance"));
+        assertFalse(user.getPreferredGenres().contains(Genre.ROMANCE));
     }
 }
