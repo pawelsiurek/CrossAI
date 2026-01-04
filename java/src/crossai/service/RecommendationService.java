@@ -14,13 +14,5 @@ import crossai.model.User;
  */
 
 public interface RecommendationService {
-    /**
-     * Get personalized recommendations for a user.
-     * 
-     * @param user The user to get recommendations for
-     * @return List of recommended items
-     * @throws IllegalArgumentException if user is null
-     */
-    
     List<Item> getRecommendations(User user);
 }
