@@ -1,5 +1,0 @@
-/workspaces/CrossAI/cpp/build/CMakeFiles/crossai-engine.dir
-/workspaces/CrossAI/cpp/build/CMakeFiles/edit_cache.dir
-/workspaces/CrossAI/cpp/build/CMakeFiles/rebuild_cache.dir
-/workspaces/CrossAI/cpp/build/_deps/json-build/CMakeFiles/edit_cache.dir
-/workspaces/CrossAI/cpp/build/_deps/json-build/CMakeFiles/rebuild_cache.dir
