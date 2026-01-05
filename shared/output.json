@@ -3,16 +3,6 @@
         {
             "genres": [
                 "Action",
-                "Crime",
-                "Drama"
-            ],
-            "id": 6,
-            "rating": 9.0,
-            "title": "The Dark Knight"
-        },
-        {
-            "genres": [
-                "Action",
                 "Sci-Fi",
                 "Thriller"
             ],
@@ -23,64 +13,21 @@
         {
             "genres": [
                 "Action",
+                "Crime",
+                "Drama"
+            ],
+            "id": 6,
+            "rating": 9.0,
+            "title": "The Dark Knight"
+        },
+        {
+            "genres": [
+                "Action",
                 "Sci-Fi"
             ],
             "id": 1,
             "rating": 8.7,
             "title": "The Matrix"
-        },
-        {
-            "genres": [
-                "Adventure",
-                "Drama",
-                "Sci-Fi"
-            ],
-            "id": 10,
-            "rating": 8.6,
-            "title": "Interstellar"
-        },
-        {
-            "genres": [
-                "Drama"
-            ],
-            "id": 4,
-            "rating": 9.3,
-            "title": "The Shawshank Redemption"
-        },
-        {
-            "genres": [
-                "Crime",
-                "Drama"
-            ],
-            "id": 2,
-            "rating": 9.2,
-            "title": "The Godfather"
-        },
-        {
-            "genres": [
-                "Crime",
-                "Drama"
-            ],
-            "id": 5,
-            "rating": 8.9,
-            "title": "Pulp Fiction"
-        },
-        {
-            "genres": [
-                "Drama",
-                "Romance"
-            ],
-            "id": 7,
-            "rating": 8.8,
-            "title": "Forrest Gump"
-        },
-        {
-            "genres": [
-                "Drama"
-            ],
-            "id": 8,
-            "rating": 8.8,
-            "title": "Fight Club"
         },
         {
             "genres": [
