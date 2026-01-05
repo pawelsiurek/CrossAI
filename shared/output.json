@@ -1,21 +1,96 @@
 {
-  "recommendations": [
-    {
-      "id": 1,
-      "title": "Inception",
-      "description": "A mind-bending thriller about dreams within dreams"
-    },
-    {
-      "id": 2,
-      "title": "The Matrix",
-      "description": "A hacker discovers the reality is a simulation"
-    },
-    {
-      "id": 3,
-      "title": "Interstellar",
-      "description": "A team of explorers travel through a wormhole in space"
-    }
-  ],
-  "status": "success",
-  "message": "Sample recommendations generated"
+    "recommendations": [
+        {
+            "genres": [
+                "Action",
+                "Crime",
+                "Drama"
+            ],
+            "id": 6,
+            "rating": 9.0,
+            "title": "The Dark Knight"
+        },
+        {
+            "genres": [
+                "Action",
+                "Sci-Fi",
+                "Thriller"
+            ],
+            "id": 3,
+            "rating": 8.8,
+            "title": "Inception"
+        },
+        {
+            "genres": [
+                "Action",
+                "Sci-Fi"
+            ],
+            "id": 1,
+            "rating": 8.7,
+            "title": "The Matrix"
+        },
+        {
+            "genres": [
+                "Adventure",
+                "Drama",
+                "Sci-Fi"
+            ],
+            "id": 10,
+            "rating": 8.6,
+            "title": "Interstellar"
+        },
+        {
+            "genres": [
+                "Drama"
+            ],
+            "id": 4,
+            "rating": 9.3,
+            "title": "The Shawshank Redemption"
+        },
+        {
+            "genres": [
+                "Crime",
+                "Drama"
+            ],
+            "id": 2,
+            "rating": 9.2,
+            "title": "The Godfather"
+        },
+        {
+            "genres": [
+                "Crime",
+                "Drama"
+            ],
+            "id": 5,
+            "rating": 8.9,
+            "title": "Pulp Fiction"
+        },
+        {
+            "genres": [
+                "Drama",
+                "Romance"
+            ],
+            "id": 7,
+            "rating": 8.8,
+            "title": "Forrest Gump"
+        },
+        {
+            "genres": [
+                "Drama"
+            ],
+            "id": 8,
+            "rating": 8.8,
+            "title": "Fight Club"
+        },
+        {
+            "genres": [
+                "Action",
+                "Adventure",
+                "Fantasy"
+            ],
+            "id": 9,
+            "rating": 8.6,
+            "title": "Star Wars"
+        }
+    ]
 }

@@ -1,12 +1,5 @@
 {
-  "user": {
-    "name": "Alice",
-    "age": 28,
-    "preferredGenres": [
-      "Action",
-      "Science Fiction",
-      "Thriller"
-    ]
-  },
-  "action": "GET_RECOMMENDATIONS"
+  "userName": "Pawel",
+  "userAge": 22,
+  "preferredGenres": ["Action", "Sci-Fi", "Drama"]
 }
