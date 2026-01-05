@@ -30,18 +30,21 @@ class MovieRecommender:
         
         print(f"Feature matrix shape: {self.tfidf_matrix.shape}")
     
-    def recommend(self, preferred_genres, n=10):
+    def recommend(self, preferred_genres, n=10, min_rating=6.0, min_votes=100):
         """
-        Recommend movies based on preferred genres.
+        Recommend movies based on preferred genres with quality filtering.
         
         Args:
             preferred_genres: List of genre names user prefers
             n: Number of recommendations to return
+            min_rating: Minimum vote_average threshold (default: 6.0)
+            min_votes: Minimum vote_count threshold (default: 100)
         
         Returns:
             List of recommended movies with scores
         """
         print(f"Generating recommendations for genres: {preferred_genres}")
+        print(f"Quality filters: rating >= {min_rating}, votes >= {min_votes}")
         
         # Create query vector from preferred genres
         query_str = ' '.join(preferred_genres)
@@ -50,21 +53,38 @@ class MovieRecommender:
         # Calculate cosine similarity
         similarities = cosine_similarity(query_vector, self.tfidf_matrix).flatten()
         
-        # Get indices of top movies
-        top_indices = similarities.argsort()[-n*3:][::-1]  # Get more than needed for filtering
+        # Get indices of top movies (get more than needed for filtering)
+        top_indices = similarities.argsort()[-n*5:][::-1]  # Increased multiplier for filtering
         
-        # Get movies with scores
+        # Get movies with scores and apply quality filters
         recommendations = []
+        filtered_count = 0
+        
         for idx in top_indices:
             if similarities[idx] > 0:  # Only include movies with positive similarity
                 movie = self.movies[idx].copy()
-                movie['ml_score'] = float(similarities[idx])
-                recommendations.append(movie)
                 
-                if len(recommendations) >= n:
-                    break
+                # Quality filters
+                rating = movie.get('vote_average', 0)
+                votes = movie.get('vote_count', 0)
+                
+                if rating >= min_rating and votes >= min_votes:
+                    # Base similarity score
+                    movie['ml_score'] = float(similarities[idx])
+                    
+                    # Optional: Boost popular movies slightly
+                    popularity = movie.get('popularity', 0)
+                    if popularity > 50:
+                        movie['ml_score'] *= 1.05  # 5% boost for popular movies
+                    
+                    recommendations.append(movie)
+                    
+                    if len(recommendations) >= n:
+                        break
+                else:
+                    filtered_count += 1
         
-        print(f"Generated {len(recommendations)} recommendations")
+        print(f"Generated {len(recommendations)} recommendations (filtered out {filtered_count} low-quality movies)")
         return recommendations
 
 def load_movies(movies_path):
