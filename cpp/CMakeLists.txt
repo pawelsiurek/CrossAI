@@ -20,6 +20,7 @@ set(SOURCES
     src/Application.cpp
     src/RuleBasedRecommender.cpp
     src/Item.cpp
+    src/Genre.cpp
 )
 
 # Executable
