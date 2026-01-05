@@ -2,9 +2,11 @@ package crossai.service;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -47,49 +49,51 @@ public class HybridRecommendationService extends BaseRecommendationService {
 
     @Override
     public List<Item> getRecommendations(User user) {
-        validateUser(user); // user ok?
-
-        // check cache first
-        String cacheKey = "user_" + user.getName() + "_" + user.getAge();
-        Optional<List<Item>> cachedResult = cache.get(cacheKey);
-
-        if (cachedResult.isPresent()) {
-            logRecommendation(user, cachedResult.get().size());
-            if (loggingEnabled) {
-                System.out.println("[CACHE] Returning cached recommendations");
-            }
-            return cachedResult.get();
+    // validate user 
+    validateUser(user);
+    
+    // check cache first
+    String cacheKey = "user_" + user.getName() + "_" + user.getAge();
+    Optional<List<Item>> cachedResult = cache.get(cacheKey);
+    
+    if (cachedResult.isPresent()) {
+        logRecommendation(user, cachedResult.get().size());
+        if (loggingEnabled) {
+            System.out.println("[CACHE] Returning cached recommendations");
         }
-
-
+        return cachedResult.get();
+    }
+    
+    try {
+        // Step 1: Write user data to input.json
+        writeUserToJson(user);
+        
+        // Step 2: Call C++ engine
+        callCppEngine();
+        
+        // Step 3: Read recommendations from output.json
+        List<Item> recommendations = readRecommendationsFromJson();
+        
+        // Step 4: Cache the results
+        cache.put(cacheKey, recommendations);
+        
+        // Step 5: Log the recommendation event
+        logRecommendation(user, recommendations.size());
+        
+        return recommendations;
+        
+    } catch (IOException e) {
+        return handleError(e, user);
+    } catch (InterruptedException e) {
+        System.err.println("[ERROR] C++ engine was interrupted: " + e.getMessage());
+        return handleError(new IOException("C++ engine interrupted"), user);
+    } finally {
         try {
-            // Step 1: Write user data to input.json
-            writeUserToJson(user);
-
-            // Step 2: (Future) Call C++ Engine here, for now we'll just read what's in output.json
-
-            // Step 3: Read recommendations from output.json
-            List<Item> recommendations = readRecommendationsFromJson();
-
-            // Step 4: Cache the results
-            cache.put(cacheKey, recommendations);
-
-            // Step 5: Log the recommendation event
-            logRecommendation(user, recommendations.size());
-
-            return recommendations;
-
+            close();
         } catch (IOException e) {
-            return handleError(e, user);
-
-        } finally {
-            try {
-                close();
-            } catch (IOException e) {
-                System.err.println("[ERROR] Failed to close resources: " + e.getMessage());
-            }
+            System.err.println("[ERROR] Failed to close resources: " + e.getMessage());
         }
-
+    }
     }
 
     private void writeUserToJson(User user) throws IOException {
@@ -120,6 +124,83 @@ public class HybridRecommendationService extends BaseRecommendationService {
         }
 
     }
+
+    /**
+     * Call the C++ recommendation engine.
+     * Executes the C++ executable and waits for it to complete.
+     * 
+     * @throws IOException if engine execution fails
+     * @throws InterruptedException if engine is interrupted
+     */
+
+    private void callCppEngine() throws IOException, InterruptedException {
+        if (loggingEnabled) {
+            System.out.println("[C++ ENGINE] Calling C++ recommendation engine...");
+        }
+        
+        // Path to C++ executable (relative to java/ directory)
+        String cppEnginePath = "../cpp/build/Debug/crossai-engine.exe";
+        
+        // Check if file exists
+        File engineFile = new File(cppEnginePath);
+        if (!engineFile.exists()) {
+            // Try Release build
+            cppEnginePath = "../cpp/build/Release/crossai-engine.exe";
+            engineFile = new File(cppEnginePath);
+            
+            if (!engineFile.exists()) {
+                // Try Linux/Mac path (no Debug/Release folder)
+                cppEnginePath = "../cpp/build/crossai-engine";
+                engineFile = new File(cppEnginePath);
+                
+                if (!engineFile.exists()) {
+                    throw new IOException("C++ engine not found. Build it first with: cd cpp/build && cmake --build .");
+                }
+            }
+        }
+        
+        if (loggingEnabled) {
+            System.out.println("[C++ ENGINE] Using engine: " + engineFile.getAbsolutePath());
+        }
+        
+        // Execute the C++ engine
+        ProcessBuilder processBuilder = new ProcessBuilder(engineFile.getAbsolutePath());
+        processBuilder.redirectErrorStream(true); // Combine stdout and stderr
+        
+        // CRITICAL: Set working directory to cpp/build/ so relative paths work
+        File cppBuildDir = new File("../cpp/build");
+        processBuilder.directory(cppBuildDir.getAbsoluteFile());
+        
+        if (loggingEnabled) {
+            System.out.println("[C++ ENGINE] Working directory: " + cppBuildDir.getAbsolutePath());
+        }
+        
+        Process process = processBuilder.start();
+        
+        // Capture output for logging
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(process.getInputStream()))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (loggingEnabled) {
+                    System.out.println("[C++ ENGINE] " + line);
+                }
+            }
+        }
+        
+        // Wait for process to complete
+        int exitCode = process.waitFor();
+        
+        if (exitCode != 0) {
+            throw new IOException("C++ engine failed with exit code: " + exitCode);
+        }
+        
+        if (loggingEnabled) {
+            System.out.println("[C++ ENGINE] Engine completed successfully");
+        }
+}
+
+
 
     private List<Item> readRecommendationsFromJson() throws IOException {
         // Check if output file exists

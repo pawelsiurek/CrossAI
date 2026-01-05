@@ -28,12 +28,17 @@ void Application::run() {
         
         // 2. Parse user preferences
         std::vector<std::string> preferredGenres;
-        if (inputData.contains("preferredGenres")) {
-            for (const auto& genre : inputData["preferredGenres"]) {
+        if (inputData.contains("user") && inputData["user"].contains("preferredGenres")) {
+            for (const auto& genre : inputData["user"]["preferredGenres"]) {
                 preferredGenres.push_back(genre.get<std::string>());
             }
         }
         
+        std::string userName = inputData["user"]["name"].get<std::string>();
+        int userAge = inputData["user"]["age"].get<int>();
+
+        std::cout << "User: " << userName << ", Age: " << userAge << std::endl;
+
         std::cout << "User preferred genres: ";
         for (const auto& genre : preferredGenres) {
             std::cout << genre << " ";

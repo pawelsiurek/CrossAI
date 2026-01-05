@@ -4,8 +4,8 @@
 
 int main(int argc, char* argv[]) {
     try {
-        std::string inputPath = "../shared/input.json";
-        std::string outputPath = "../shared/output.json";
+        std::string inputPath = "../../shared/input.json";
+        std::string outputPath = "../../shared/output.json";
 
         std::cout << "CrossAI C++ Engine starting..." << std::endl;
 
