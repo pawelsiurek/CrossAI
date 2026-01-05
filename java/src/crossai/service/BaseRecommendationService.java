@@ -29,7 +29,7 @@ public abstract class BaseRecommendationService implements RecommendationService
     // logging a recommendation event
     protected void logRecommendation(User user, int count) {
         if (loggingEnabled) {
-            System.out.println("[RECOMMENDATION] Generated" + count +
+            System.out.println("[RECOMMENDATION] Generated " + count +
                                 " recommendations for user: " + user.getName());
         }
     }
