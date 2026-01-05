@@ -4,6 +4,7 @@
 #include "Item.h"
 #include "Recommender.h"
 #include <memory>
+#include <thread>
 
 class Application {
 private:
@@ -18,5 +19,6 @@ public:
     void loadItems(const std::string& path);
     void writeIntermediateData(const std::string& path);
     void callPythonML();
+    void callPythonMLAsync();
     void handleError(const std::exception& e);
 };

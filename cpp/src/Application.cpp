@@ -4,6 +4,9 @@
 #include <fstream>
 #include <iostream>
 #include <cstdlib>
+#include "Genre.h"
+#include <thread>
+#include <chrono>
 
 using json = nlohmann::json;
 
@@ -61,15 +64,15 @@ void Application::run() {
         };
         
         std::cout << "Loaded " << allMovies.size() << " movies" << std::endl;
-        
+
         // 4. Get recommendations using rule-based filtering
         std::cout << "Applying rule-based filtering..." << std::endl;
         std::vector<Item> recommendations = recommender->recommend(preferredGenres, allMovies);
         
         std::cout << "Generated " << recommendations.size() << " recommendations" << std::endl;
         
-        // 5. TODO: Call Python ML for further refinement (future step)
-        // callPythonML();
+        // 5. Call Python ML asynchronously
+        callPythonMLAsync();
         
         // 6. Write output.json
         json outputData;
@@ -111,9 +114,31 @@ void Application::writeIntermediateData(const std::string& path) {
 }
 
 void Application::callPythonML() {
-    // TODO: Call Python ML script
-    std::cout << "Calling Python ML module..." << std::endl;
+    std::cout << "Calling Python ML module (synchronous)..." << std::endl;
     // system("python ../python/recommender/model.py");
+}
+
+void Application::callPythonMLAsync() {
+    std::cout << "Launching Python ML in separate thread...\n";
+    std::thread pythonThread([this]() {
+        std::cout << "[THREAD] Python ML thread started (ID: " 
+                  << std::this_thread::get_id() << ")\n";
+        
+        // Simulate Python ML call
+        // In real implementation: system("python ../python/recommender/model.py");
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        
+        std::cout << "[THREAD] Python ML processing complete\n";
+    });
+    
+    std::cout << "[MAIN] Main thread continues (ID: " 
+              << std::this_thread::get_id() << ")\n";
+    std::cout << "[MAIN] Doing other work while Python runs...\n";
+    
+    pythonThread.join();
+    
+    std::cout << "[MAIN] Python thread joined - all work complete\n";
+    std::cout << "=== Parallel Programming Complete ===\n\n";
 }
 
 void Application::handleError(const std::exception& e) {
