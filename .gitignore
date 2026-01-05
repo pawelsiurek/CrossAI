@@ -72,3 +72,8 @@ python/data/*.csv
 *.log
 *.tmp
 *.temp
+# Temporary runtime JSON files
+shared/ml_input.json
+shared/ml_output.json
+shared/input.json
+shared/output.json
