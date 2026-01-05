@@ -20,4 +20,11 @@ public:
     
     // Check if item matches preferred genres
     bool matchesGenres(const std::vector<std::string>& preferredGenres) const;
+
+    bool operator==(const Item& other) const; // item comparison by ID
+    bool operator!=(const Item& other) const;
+    bool operator<(const Item& other) const; // used for sorting by rating
+    bool operator>(const Item& other) const;
+
+    friend std::ostream& operator<<(std::ostream& os, const Item& item);
 };
