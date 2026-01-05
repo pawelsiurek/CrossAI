@@ -51,7 +51,7 @@ def preprocess_movies(input_path, output_path, limit=None):
     # Fill missing ratings with 0
     df['vote_average'] = df['vote_average'].fillna(0)
     df['vote_count'] = df['vote_count'].fillna(0)
-    df['popularity'] = df['popularity'].fillna(0)
+    df['popularity'] = pd.to_numeric(df['popularity'], errors='coerce').fillna(0)
     
     # Filter movies with at least some votes (quality control)
     df = df[df['vote_count'] >= 10]
