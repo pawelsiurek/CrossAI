@@ -1,0 +1,10 @@
+/workspaces/CrossAI/java/src/crossai/service/RecommendationService.java
+/workspaces/CrossAI/java/src/crossai/service/HybridRecommendationService.java
+/workspaces/CrossAI/java/src/crossai/util/Cache.java
+/workspaces/CrossAI/java/src/crossai/model/Item.java
+/workspaces/CrossAI/java/src/crossai/service/MockRecommendationService.java
+/workspaces/CrossAI/java/src/crossai/controller/AppController.java
+/workspaces/CrossAI/java/src/crossai/model/User.java
+/workspaces/CrossAI/java/src/crossai/MainApp.java
+/workspaces/CrossAI/java/src/crossai/model/Genre.java
+/workspaces/CrossAI/java/src/crossai/service/BaseRecommendationService.java

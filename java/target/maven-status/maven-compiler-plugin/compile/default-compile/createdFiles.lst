@@ -1,0 +1,11 @@
+crossai/util/Cache.class
+crossai/service/MockRecommendationService.class
+crossai/service/RecommendationService.class
+crossai/service/HybridRecommendationService.class
+crossai/model/Genre.class
+crossai/controller/AppController.class
+crossai/service/BaseRecommendationService.class
+crossai/model/Item.class
+crossai/MainApp.class
+crossai/MainApp$1.class
+crossai/model/User.class
