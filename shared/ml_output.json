@@ -1,0 +1,125 @@
+{
+  "ml_recommendations": [
+    {
+      "id": 294993,
+      "title": "Rise of the Legend",
+      "genres": [
+        "Action",
+        "Drama"
+      ],
+      "vote_average": 6.4,
+      "vote_count": 34.0,
+      "popularity": "4.068355",
+      "ml_score": 1.0
+    },
+    {
+      "id": 44032,
+      "title": "Bending The Rules",
+      "genres": [
+        "Action",
+        "Drama"
+      ],
+      "vote_average": 5.2,
+      "vote_count": 22.0,
+      "popularity": "10.518",
+      "ml_score": 1.0
+    },
+    {
+      "id": 73211,
+      "title": "King of Devil's Island",
+      "genres": [
+        "Drama",
+        "Action"
+      ],
+      "vote_average": 7.2,
+      "vote_count": 67.0,
+      "popularity": "4.167899",
+      "ml_score": 1.0
+    },
+    {
+      "id": 58878,
+      "title": "Three Outlaw Samurai",
+      "genres": [
+        "Action",
+        "Drama"
+      ],
+      "vote_average": 7.0,
+      "vote_count": 22.0,
+      "popularity": "1.133661",
+      "ml_score": 1.0
+    },
+    {
+      "id": 14171,
+      "title": "Home of the Brave",
+      "genres": [
+        "Action",
+        "Drama"
+      ],
+      "vote_average": 5.5,
+      "vote_count": 48.0,
+      "popularity": "4.068478",
+      "ml_score": 1.0
+    },
+    {
+      "id": 169209,
+      "title": "Empire State",
+      "genres": [
+        "Action",
+        "Drama"
+      ],
+      "vote_average": 4.9,
+      "vote_count": 229.0,
+      "popularity": "9.003792",
+      "ml_score": 1.0
+    },
+    {
+      "id": 67327,
+      "title": "The Samurai of Ayothaya",
+      "genres": [
+        "Action",
+        "Drama"
+      ],
+      "vote_average": 5.6,
+      "vote_count": 13.0,
+      "popularity": "1.348011",
+      "ml_score": 1.0
+    },
+    {
+      "id": 96721,
+      "title": "Rush",
+      "genres": [
+        "Drama",
+        "Action"
+      ],
+      "vote_average": 7.7,
+      "vote_count": 2310.0,
+      "popularity": "10.63552",
+      "ml_score": 1.0
+    },
+    {
+      "id": 337876,
+      "title": "Gabbar Is Back",
+      "genres": [
+        "Drama",
+        "Action"
+      ],
+      "vote_average": 7.0,
+      "vote_count": 33.0,
+      "popularity": "1.812728",
+      "ml_score": 1.0
+    },
+    {
+      "id": 40081,
+      "title": "Crippled Avengers",
+      "genres": [
+        "Action",
+        "Drama"
+      ],
+      "vote_average": 7.0,
+      "vote_count": 21.0,
+      "popularity": "4.022324",
+      "ml_score": 1.0
+    }
+  ],
+  "count": 10
+}
