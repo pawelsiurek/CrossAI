@@ -203,47 +203,65 @@ public class HybridRecommendationService extends BaseRecommendationService {
 
 
     private List<Item> readRecommendationsFromJson() throws IOException {
-        // Check if output file exists
-        if (!Files.exists(Paths.get(outputFilePath))) {
-            System.err.println("[WARNING] Output file not found: " + outputFilePath);
-            System.err.println("[INFO] Creating sample output file for testing...");
-            createSampleOutputFile();
-        }
-        
-        // Read the file
-        currentReader = new BufferedReader(new FileReader(outputFilePath));
-        StringBuilder jsonContent = new StringBuilder();
-        String line;
-        
-        while ((line = currentReader.readLine()) != null) {
-            jsonContent.append(line);
-        }
-        
-        if (loggingEnabled) {
-            System.out.println("[FILE I/O] Read recommendations from: " + outputFilePath);
-        }
-        
-        // Parse JSON
-        JsonObject root = gson.fromJson(jsonContent.toString(), JsonObject.class);
-        JsonArray recommendationsArray = root.getAsJsonArray("recommendations");
-        
-        List<Item> items = new ArrayList<>();
-        
-        if (recommendationsArray != null) {
-            for (JsonElement element : recommendationsArray) {
-                JsonObject itemObj = element.getAsJsonObject();
-                
-                int id = itemObj.get("id").getAsInt();
-                String title = itemObj.get("title").getAsString();
-                String description = itemObj.has("description") ? 
-                                    itemObj.get("description").getAsString() : "";
-                
-                items.add(new Item(id, title, description));
-            }
-        }
-        
-        return items;
+    // Check if output file exists
+    if (!Files.exists(Paths.get(outputFilePath))) {
+        System.err.println("[WARNING] Output file not found: " + outputFilePath);
+        System.err.println("[INFO] Creating sample output file for testing...");
+        createSampleOutputFile();
     }
+    
+    // Read the file
+    currentReader = new BufferedReader(new FileReader(outputFilePath));
+    StringBuilder jsonContent = new StringBuilder();
+    String line;
+    
+    while ((line = currentReader.readLine()) != null) {
+        jsonContent.append(line);
+    }
+    
+    if (loggingEnabled) {
+        System.out.println("[FILE I/O] Read recommendations from: " + outputFilePath);
+    }
+    
+    // Parse JSON
+    JsonObject root = gson.fromJson(jsonContent.toString(), JsonObject.class);
+    JsonArray recommendationsArray = root.getAsJsonArray("recommendations");
+    
+    List<Item> items = new ArrayList<>();
+    
+    if (recommendationsArray != null) {
+        for (JsonElement element : recommendationsArray) {
+            JsonObject itemObj = element.getAsJsonObject();
+            
+            int id = itemObj.get("id").getAsInt();
+            String title = itemObj.get("title").getAsString();
+            String description = itemObj.has("description") ? 
+                                itemObj.get("description").getAsString() : "";
+            
+            // Parse genres array
+            List<String> genres = new ArrayList<>();
+            if (itemObj.has("genres")) {
+                JsonArray genresArray = itemObj.getAsJsonArray("genres");
+                for (JsonElement genreElement : genresArray) {
+                    genres.add(genreElement.getAsString());
+                }
+            }
+            
+            // Parse rating
+            double rating = 0.0;
+            if (itemObj.has("rating")) {
+                rating = itemObj.get("rating").getAsDouble();
+            } else if (itemObj.has("vote_average")) {
+                // Python ML returns "vote_average"
+                rating = itemObj.get("vote_average").getAsDouble();
+            }
+            
+            items.add(new Item(id, title, description, genres, rating));
+        }
+    }
+    
+    return items;
+}
 
     /**
      * Create a sample output file for testing before C++ engine is ready.

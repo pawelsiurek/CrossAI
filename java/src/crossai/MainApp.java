@@ -319,22 +319,46 @@ public class MainApp extends JFrame {
      * Display recommendations in the results area.
      */
     private void displayRecommendations(List<Item> recommendations) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("=== YOUR RECOMMENDATIONS ===\n\n");
+    StringBuilder sb = new StringBuilder();
+    sb.append("══════════════════════════════════════\n");
+    sb.append("       YOUR RECOMMENDATIONS\n");
+    sb.append("══════════════════════════════════════\n\n");
+    
+    int count = 1;
+    for (Item item : recommendations) {
+        sb.append("─────────────────────────────────────\n");
+        sb.append(String.format("%d. %s\n", count++, item.getTitle()));
+        sb.append("─────────────────────────────────────\n");
         
-        int count = 1;
-        for (Item item : recommendations) {
-            sb.append(count++).append(". ").append(item.getTitle()).append("\n");
-            
-            String desc = item.getDescription();
-            if (!desc.isEmpty()) {
-                sb.append("   ").append(desc).append("\n");
-            }
-            sb.append("\n");
+        // ID
+        sb.append(String.format("🎬 ID: %d\n", item.getId()));
+        
+        // Genres
+        String genresStr = item.getGenresAsString();
+        if (!genresStr.equals("Unknown")) {
+            sb.append(String.format("🎭 Genres: %s\n", genresStr));
         }
         
-        resultsArea.setText(sb.toString());
-        resultsArea.setCaretPosition(0); // Scroll to top
+        // Rating
+        if (item.getRating() > 0) {
+            sb.append(String.format("⭐ Rating: %.1f/10\n", item.getRating()));
+        }
+        
+        // Description (if available)
+        String desc = item.getDescription();
+        if (desc != null && !desc.isEmpty() && !desc.equals("A great movie")) {
+            sb.append(String.format("\n📝 %s\n", desc));
+        }
+        
+        sb.append("\n");
+    }
+    
+    sb.append("══════════════════════════════════════\n");
+    sb.append(String.format("   Total: %d movies recommended\n", recommendations.size()));
+    sb.append("══════════════════════════════════════\n");
+    
+    resultsArea.setText(sb.toString());
+    resultsArea.setCaretPosition(0); // Scroll to top
     }
     
     /**
