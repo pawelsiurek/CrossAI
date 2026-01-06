@@ -1,4 +1,5 @@
 /workspaces/CrossAI/java/src/crossai/service/RecommendationService.java
+/workspaces/CrossAI/java/src/test/java/crossai/FullSystemTest.java
 /workspaces/CrossAI/java/src/crossai/service/HybridRecommendationService.java
 /workspaces/CrossAI/java/src/crossai/util/Cache.java
 /workspaces/CrossAI/java/src/crossai/model/Item.java

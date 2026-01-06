@@ -9,3 +9,4 @@ crossai/model/Item.class
 crossai/MainApp.class
 crossai/MainApp$1.class
 crossai/model/User.class
+crossai/FullSystemTest.class
