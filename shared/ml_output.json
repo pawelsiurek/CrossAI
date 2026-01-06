@@ -1,77 +1,27 @@
 {
   "ml_recommendations": [
     {
-      "id": 309886,
-      "title": "Blood Father",
+      "id": 11838,
+      "title": "Ju-on: The Grudge",
       "genres": [
-        "Action",
-        "Thriller"
+        "Horror"
       ],
-      "vote_average": 6.2,
-      "vote_count": 525.0,
-      "popularity": 7.146017,
+      "vote_average": 6.7,
+      "vote_count": 199.0,
+      "popularity": 7.614692,
       "ml_score": 1.0
     },
     {
-      "id": 4909,
-      "title": "The Day of the Jackal",
+      "id": 290999,
+      "title": "Wyrmwood: Road Of The Dead",
       "genres": [
-        "Action",
-        "Thriller"
+        "Horror"
       ],
-      "vote_average": 7.3,
-      "vote_count": 150.0,
-      "popularity": 6.320225,
-      "ml_score": 1.0
-    },
-    {
-      "id": 9319,
-      "title": "The Last Boy Scout",
-      "genres": [
-        "Action",
-        "Thriller"
-      ],
-      "vote_average": 6.5,
-      "vote_count": 502.0,
-      "popularity": 10.550259,
-      "ml_score": 1.0
-    },
-    {
-      "id": 1573,
-      "title": "Die Hard 2",
-      "genres": [
-        "Action",
-        "Thriller"
-      ],
-      "vote_average": 6.6,
-      "vote_count": 1920.0,
-      "popularity": 18.785984,
-      "ml_score": 1.0
-    },
-    {
-      "id": 117263,
-      "title": "Olympus Has Fallen",
-      "genres": [
-        "Action",
-        "Thriller"
-      ],
-      "vote_average": 6.2,
-      "vote_count": 3010.0,
-      "popularity": 10.978188,
-      "ml_score": 1.0
-    },
-    {
-      "id": 260346,
-      "title": "Taken 3",
-      "genres": [
-        "Thriller",
-        "Action"
-      ],
-      "vote_average": 6.1,
-      "vote_count": 2225.0,
-      "popularity": 18.081483,
+      "vote_average": 6.3,
+      "vote_count": 173.0,
+      "popularity": 6.635569,
       "ml_score": 1.0
     }
   ],
-  "count": 6
+  "count": 2
 }

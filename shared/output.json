@@ -2,42 +2,25 @@
     "recommendations": [
         {
             "genres": [
-                "Action",
-                "Sci-Fi",
-                "Thriller"
+                "Horror"
             ],
-            "id": 3,
-            "rating": 8.8,
-            "title": "Inception"
+            "id": 11838,
+            "ml_score": 1.0,
+            "popularity": 7.614692,
+            "rating": 6.7,
+            "title": "Ju-on: The Grudge",
+            "vote_count": 199.0
         },
         {
             "genres": [
-                "Action",
-                "Crime",
-                "Drama"
+                "Horror"
             ],
-            "id": 6,
-            "rating": 9.0,
-            "title": "The Dark Knight"
-        },
-        {
-            "genres": [
-                "Action",
-                "Sci-Fi"
-            ],
-            "id": 1,
-            "rating": 8.7,
-            "title": "The Matrix"
-        },
-        {
-            "genres": [
-                "Action",
-                "Adventure",
-                "Fantasy"
-            ],
-            "id": 9,
-            "rating": 8.6,
-            "title": "Star Wars"
+            "id": 290999,
+            "ml_score": 1.0,
+            "popularity": 6.635569,
+            "rating": 6.3,
+            "title": "Wyrmwood: Road Of The Dead",
+            "vote_count": 173.0
         }
     ]
 }
