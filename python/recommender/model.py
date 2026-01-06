@@ -131,7 +131,7 @@ def main():
         
         # Check if input exists (called by C++)
         if not input_path.exists():
-            print(f"❌ Input file not found: {input_path}")
+            print(f"[ERROR] Input file not found: {input_path}")
             print("Using default preferences for testing...")
             # Use default for testing
             user_data = {
@@ -156,7 +156,7 @@ def main():
         # Save output
         save_output(recommendations, output_path)
         
-        print("\n✅ ML Recommendations generated successfully!")
+        print("\n[SUCCESS] ML Recommendations generated successfully!")
         print(f"Top 3 recommendations:")
         for i, movie in enumerate(recommendations[:3], 1):
             print(f"  {i}. {movie['title']} (Score: {movie['ml_score']:.3f})")
