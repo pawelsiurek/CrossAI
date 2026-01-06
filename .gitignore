@@ -29,7 +29,7 @@ cpp/.cache/
 # ===========================
 # Python
 # ===========================
-python/__pycache__/
+python/recommender/__pycache__/
 python/*.py[cod]
 python/*$py.class
 python/*.so
