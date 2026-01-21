@@ -7,7 +7,7 @@
 
 A sophisticated hybrid movie recommendation system that demonstrates cross-language integration using **Java**, **C++**, and **Python**. Built as an Object-Oriented Programming laboratory project with emphasis on clean architecture, design patterns, and machine learning integration.
 
-## 🎯 Project Overview
+## Project Overview
 
 CrossAI is a three-tier application that showcases:
 - **Java UI Client**: Interactive user interface for movie recommendations
@@ -38,15 +38,15 @@ CrossAI is a three-tier application that showcases:
 └─────────────────┘
 ```
 
-## ✨ Features
+## Features
 
-- 🎬 **Personalized Recommendations**: ML-based movie suggestions
-- 🔍 **Genre Filtering**: Rule-based genre preferences
-- 💾 **User Profiles**: Persistent user data and preferences
-- 🚀 **High Performance**: Multi-threaded C++ engine
-- 📊 **Custom ML Model**: Trained on real movie datasets
+- **Personalized Recommendations**: ML-based movie suggestions
+- **Genre Filtering**: Rule-based genre preferences
+- **User Profiles**: Persistent user data and preferences
+- **High Performance**: Multi-threaded C++ engine
+- **Custom ML Model**: Trained on real movie datasets
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Component | Technologies |
 |-----------|-------------|
@@ -56,7 +56,7 @@ CrossAI is a three-tier application that showcases:
 | **Build Tools** | Maven, CMake, pip |
 | **Testing** | JUnit, Google Test, pytest |
 
-## 📋 Prerequisites
+## Prerequisites
 
 - **Java Development Kit (JDK)** 17 or higher
 - **C++ Compiler** (GCC 9+, Clang 10+, or MSVC 2019+)
@@ -64,8 +64,9 @@ CrossAI is a three-tier application that showcases:
 - **Python** 3.8 or higher
 - **Maven** 3.6 or higher
 - **Git**
+- **PowerShell** (for automated build script)
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Clone the Repository
 
@@ -82,7 +83,30 @@ pip install -r requirements.txt
 cd ..
 ```
 
-### 3. Build C++ Engine
+### 3. Build, Test, and Run (Automated) ⚡
+
+**The easiest way to get started:**
+
+```powershell
+.\run.ps1
+```
+
+This automated script will:
+- ✅ Build the C++ engine
+- ✅ Build the Java client  
+- ✅ Run all unit tests (C++ and Java)
+- ✅ **Start the application** (only if all tests pass)
+
+If any tests fail, the script will stop and report the errors, ensuring you only run a fully tested build.
+
+---
+
+### Alternative: Manual Build and Run
+
+<details>
+<summary>Click to expand manual build instructions</summary>
+
+#### Build C++ Engine
 
 ```bash
 cd cpp
@@ -92,7 +116,7 @@ cmake --build .
 cd ../..
 ```
 
-### 4. Build Java Client
+#### Build Java Client
 
 ```bash
 cd java
@@ -100,7 +124,7 @@ mvn clean install
 cd ..
 ```
 
-### 5. Run the Application
+#### Run the Application
 
 ```bash
 # Start C++ Engine (in one terminal)
@@ -112,7 +136,9 @@ cd java
 mvn exec:java
 ```
 
-## 📁 Project Structure
+</details>
+
+## Project Structure
 
 ```
 CrossAI/
@@ -131,39 +157,44 @@ CrossAI/
 │   └── requirements.txt  # Dependencies
 ├── shared/                # Inter-process communication
 ├── docs/                  # Documentation
+├── run.ps1               # Automated build & run script
 └── README.md
 ```
 
-## 🧪 Running Tests
+## Running Tests
 
-### Java Tests
+### Automated Testing
+The `run.ps1` script automatically runs all tests before starting the application.
+
+### Manual Testing
+
+#### Java Tests
 ```bash
 cd java
 mvn test
 ```
 
-### C++ Tests
+#### C++ Tests
 ```bash
 cd cpp/build
 ctest
 ```
 
-### Python Tests
+#### Python Tests
 ```bash
 cd python
 pytest tests/
 ```
 
-## 📊 Dataset
+## Dataset
 
 The project uses a movie dataset from Kaggle containing:
 - Movie titles, genres, ratings
 - User preferences and viewing history
 - Metadata for recommendation training
 
-*Dataset source will be added after selection*
 
-## 🎓 Learning Objectives
+## Learning Objectives
 
 This project demonstrates:
 - **OOP Principles**: Inheritance, polymorphism, encapsulation
@@ -174,22 +205,22 @@ This project demonstrates:
 - **Build Systems**: Maven, CMake automation
 - **ML Integration**: Custom recommendation algorithms
 
-## 👥 Team
+## Team
 
 - **Mateusz Wilk** - Architecture & C++ Engine
-- **Paweł Siurek** - Java Client & Integration
+- **Paweł Siurek** - Java Client & Integration & ML side
 
-## 📝 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
-- OOP Laboratory Course - [University Name]
+- OOP Laboratory Course - Poznan University of Technology
 - Kaggle for movie datasets
 - Open-source community for tools and libraries
 
-## 📧 Contact
+## Contact
 
 For questions or feedback, please open an issue on GitHub.
 
