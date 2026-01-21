@@ -6,38 +6,24 @@ import crossai.model.Genre;
 import crossai.model.Item;
 import crossai.model.User;
 import crossai.service.HybridRecommendationService;
-import crossai.service.MockRecommendationService;
 import crossai.service.RecommendationService;
 
 /**
- * Controller class that coordinates between the UI and recommendation services.
+ * Controller class that coordinates between the UI and recommendation service.
  * Follows the MVC pattern - this is the Controller layer.
  * 
  * Responsibilities:
  * - Manage current user
  * - Coordinate recommendation requests
- * - Handle service selection (Mock vs Hybrid)
  * - Provide simplified API for UI layer
  */
-
 public class AppController {
     private User currentUser;
     private RecommendationService service;
-    private boolean useMockService;
 
     public AppController() {
-        this.useMockService = true;
-        this.service = new MockRecommendationService("../shared");
+        this.service = new HybridRecommendationService("../shared");
         this.currentUser = null;
-    }
-
-    public AppController(boolean useMockService) {
-        this.useMockService = useMockService;
-        if (useMockService) {
-            this.service = new MockRecommendationService("../shared");
-        } else {
-            this.service = new HybridRecommendationService("../shared");
-        }
     }
 
     public User createUser(String name, int age) {
@@ -54,7 +40,9 @@ public class AppController {
         System.out.println("[CONTROLLER] Set current user: " + user.getName());
     }
 
-    public User getCurrentUser() { return currentUser; }
+    public User getCurrentUser() {
+        return currentUser;
+    }
 
     public void addGenreToCurrentUser(Genre genre) {
         if (currentUser == null) {
@@ -70,9 +58,8 @@ public class AppController {
         }
         currentUser.addPreferredGenres(genres);
         System.out.println("[CONTROLLER] Added " + genres.size() + " genres to " + currentUser.getName());
-    }    
+    }
 
-    // recommendations for currentUser
     public List<Item> getRecommendationsForCurrentUser() {
         if (currentUser == null) {
             throw new IllegalStateException("No user set. Call createUser() or setCurrentUser() first.");
@@ -89,7 +76,6 @@ public class AppController {
         return recommendations;
     }
 
-    // recommendatuins for a specific User
     public List<Item> getRecommendations(User user) {
         if (user == null) {
             throw new IllegalArgumentException("User cannot be null");
@@ -97,47 +83,23 @@ public class AppController {
         return service.getRecommendations(user);
     }
 
-    public void setUseMockService(boolean useMock) {
-        if (this.useMockService == useMock) {
-            return; // Already using desired service
-        }
-        
-        this.useMockService = useMock;
-        
-        // Close current service if it's hybrid (has resources)
-        if (service instanceof HybridRecommendationService) {
-            try {
-                ((HybridRecommendationService) service).close();
-            } catch (Exception e) {
-                System.err.println("[ERROR] Failed to close hybrid service: " + e.getMessage());
-            }
-        }
-        
-        // Create new service
-        if (useMock) {
-            this.service = new MockRecommendationService("../shared");
-            System.out.println("[CONTROLLER] Switched to MOCK service");
-        } else {
-            this.service = new HybridRecommendationService("../shared");
-            System.out.println("[CONTROLLER] Switched to HYBRID service");
-        }
-    }
-
-    public boolean isUsingMockService() {
-        return useMockService;
-    }
-    
     public void clearCurrentUser() {
         this.currentUser = null;
         System.out.println("[CONTROLLER] Cleared current user");
     }
-    
+
     public boolean hasCurrentUser() {
         return currentUser != null;
     }
     
-    public String getServiceTypeName() {
-        return useMockService ? "Mock" : "Hybrid";
+    public void close() {
+        if (service instanceof HybridRecommendationService) {
+            try {
+                ((HybridRecommendationService) service).close();
+                System.out.println("[CONTROLLER] Closed hybrid service");
+            } catch (Exception e) {
+                System.err.println("[ERROR] Failed to close hybrid service: " + e.getMessage());
+            }
+        }
     }
-    
 }
