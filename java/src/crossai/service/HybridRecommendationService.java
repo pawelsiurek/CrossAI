@@ -53,7 +53,7 @@ public class HybridRecommendationService extends BaseRecommendationService {
     validateUser(user);
     
     // check cache first
-    String cacheKey = "user_" + user.getName() + "_" + user.getAge();
+    String cacheKey = "user_" + user.getName() + "_" + user.getAge() + "_genres" + user.getPreferredGenres().toString();
     Optional<List<Item>> cachedResult = cache.get(cacheKey);
     
     if (cachedResult.isPresent()) {
