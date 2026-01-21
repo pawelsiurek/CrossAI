@@ -46,17 +46,13 @@ class MovieRecommender:
         print(f"Generating recommendations for genres: {preferred_genres}")
         print(f"Quality filters: rating >= {min_rating}, votes >= {min_votes}")
         
-        # Create query vector from preferred genres
         query_str = ' '.join(preferred_genres)
         query_vector = self.tfidf.transform([query_str])
         
-        # Calculate cosine similarity
         similarities = cosine_similarity(query_vector, self.tfidf_matrix).flatten()
         
-        # Get indices of top movies (get more than needed for filtering)
         top_indices = similarities.argsort()[-n*5:][::-1]  # Increased multiplier for filtering
         
-        # Get movies with scores and apply quality filters
         recommendations = []
         filtered_count = 0
         
@@ -164,7 +160,7 @@ def main():
         return 0
         
     except Exception as e:
-        print(f"❌ Error in ML model: {e}")
+        print(f"Error in ML model: {e}")
         import traceback
         traceback.print_exc()
         return 1

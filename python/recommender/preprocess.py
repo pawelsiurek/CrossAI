@@ -108,5 +108,5 @@ if __name__ == "__main__":
     # Process all movies (or set limit for testing, e.g., limit=1000)
     movies = preprocess_movies(input_path, output_path, limit=None)
     
-    print(f"\n✅ Successfully processed {len(movies)} movies!")
+    print(f"\nSuccessfully processed {len(movies)} movies!")
     print(f"Output saved to: {output_path}")

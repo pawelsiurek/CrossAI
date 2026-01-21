@@ -48,16 +48,16 @@ void Application::run() {
         }
         std::cout << std::endl;
         
-        // 5. Prepare input for Python ML
+        // 3. Prepare input for Python ML
         prepareMLInput(preferredGenres);
         
-        // 6. Call Python ML asynchronously
+        // 4. Call Python ML asynchronously
         callPythonMLAsync();
         
-        // 7. Copy ML recommendations to output.json (ONLY ML, not rule-based!)
+        // 5. Copy ML recommendations to output.json (ONLY ML, not rule-based!)
         copyMLOutputToOutput();
         
-        // 8. Optional: Display ML results in console
+        // 6. Optional: Display ML results in console
         readMLOutput();
         
         std::cout << "Recommendations generated successfully!\n";
@@ -115,9 +115,6 @@ void Application::callPythonMLAsync() {
     std::cout << "[MAIN] Main thread continues (ID: " 
               << std::this_thread::get_id() << ")\n";
     std::cout << "[MAIN] Doing other work while Python runs...\n";
-    
-    // Simulate some work
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
     
     std::cout << "[MAIN] Waiting for Python thread to finish...\n";
     pythonThread.join();
